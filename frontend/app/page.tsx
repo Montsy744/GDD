@@ -5,7 +5,7 @@ import { Transaction } from "./types/Transaction";
 import { getAllTransactions } from "./services/TransactionServices";
 import toast from "react-hot-toast";
 import Header from "./components/sections/header";
-import { Activity } from "lucide-react";
+import { Activity, Trash, TrendingDown, TrendingUp } from "lucide-react";
 import ProgressBar from "./components/sections/progressBar";
 
 export default function Home() {
@@ -68,6 +68,52 @@ export default function Home() {
     <div className="w-2/3 flex flex-col gap-4">
       <Header balance={ balance } income={ income } expense={ expense } />
       <ProgressBar ratio={ratio}/>
+
+      <div className="overflow-x-auto rounded-2xl border-2 border-warning/10 border-dashed bg-warning/5">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Description</th>
+              <th>Montant</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            { transactions.map((t, index) => (
+              <tr key={t.id}>
+                <th>{ index + 1}</th>
+                <td>{ t.text }</td>
+                <td className="flex font-semibold gap-2 items-center">
+                  { t.amount > 0 
+                        ? (<TrendingUp className="text-succes w-6 h-6" />)
+                        : (<TrendingDown className="text-error w-6 h-6" />)
+                  }
+                  {
+                    t.amount > 0 
+                        ? `+${t.amount}`
+                        : `-${t.amount}`
+                  }
+                
+                </td>
+                <td>{ formatDate(t.created_at) }</td>
+                <td>
+                  <button 
+                    className="btn btn-sm btn-error btn-soft"
+                    title="Supprimer"
+                  >
+                    <Trash className="text-error w-6 h-6" />
+                  </button>
+                  </td>
+              </tr>
+            ))}
+
+            
+          </tbody>
+        </table>
+      </div>
 
     </div>
   );
