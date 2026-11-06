@@ -151,7 +151,7 @@ export default function Home() {
                   {
                     t.amount > 0 
                         ? `+${t.amount}`
-                        : `-${t.amount}`
+                        : `${t.amount}`
                   }
                 
                 </td>
