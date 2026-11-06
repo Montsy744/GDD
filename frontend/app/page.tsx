@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { Transaction } from "./types/Transaction";
 import { getAllTransactions } from "./services/TransactionServices";
 import toast from "react-hot-toast";
-import { ArrowDownCircle, ArrowUpCircle, Wallet } from "lucide-react";
 import Header from "./components/sections/header";
+import { Activity } from "lucide-react";
+import ProgressBar from "./components/sections/progressBar";
 
 export default function Home() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -66,6 +67,7 @@ export default function Home() {
   return (
     <div className="w-2/3 flex flex-col gap-4">
       <Header balance={ balance } income={ income } expense={ expense } />
+      <ProgressBar ratio={ratio}/>
 
     </div>
   );
