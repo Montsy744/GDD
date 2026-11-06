@@ -21,7 +21,6 @@ export default function Home() {
       const data = await getAllTransactions();
       if (isMounted) {
         setTransactions(data);
-        toast.success("Transactions chargées");
       }
     } catch (error) {
       if (isMounted) {
